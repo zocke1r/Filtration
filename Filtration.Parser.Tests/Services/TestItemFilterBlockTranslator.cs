@@ -631,7 +631,41 @@ namespace Filtration.Parser.Tests.Services
             Assert.AreEqual(95, blockItem.SecondValue);
         }
 
-        [Test]
+		[Test]
+		public void TranslateStringToItemFilterBlock_PlayAlertSoundWithStringID_ReturnsCorrectObject () {
+			// Arrange
+
+			var inputString = "Show" + Environment.NewLine +
+							  "    PlayAlertSound shMirror 300";
+
+			// Act
+			var result = _testUtility.Translator.TranslateStringToItemFilterBlock (inputString, null);
+
+			// Assert
+			Assert.AreEqual (1, result.BlockItems.Count (b => b is SoundBlockItem));
+			var blockItem = result.BlockItems.OfType<SoundBlockItem> ().First ();
+			Assert.AreEqual (1, blockItem.Value);
+			Assert.AreEqual (79, blockItem.SecondValue);
+		}
+
+		[Test]
+		public void TranslateStringToItemFilterBlock_PlayAlertSoundWithWrongStringID_ReturnsCorrectObject () {
+			// Arrange
+
+			var inputString = "Show" + Environment.NewLine +
+							  "    PlayAlertSound test 300";
+
+			// Act
+			var result = _testUtility.Translator.TranslateStringToItemFilterBlock (inputString, null);
+
+			// Assert
+			Assert.AreEqual (1, result.BlockItems.Count (b => b is SoundBlockItem));
+			var blockItem = result.BlockItems.OfType<SoundBlockItem> ().First ();
+			Assert.AreEqual (1, blockItem.Value);
+			Assert.AreEqual (79, blockItem.SecondValue);
+		}
+
+		[Test]
         public void TranslateStringToItemFilterBlock_SectionComment_ReturnsItemFilterSectionObjectWithCorrectDescription()
         {
             // Arrange

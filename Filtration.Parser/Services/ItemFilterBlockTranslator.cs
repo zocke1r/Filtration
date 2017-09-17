@@ -214,7 +214,7 @@ namespace Filtration.Parser.Services
                                 {
                                     var blockItemValue = new SoundBlockItem
                                     {
-                                        Value = Convert.ToInt16(matches[0].Value),
+                                        Value = Convert.ToInt16(matches[0].Value) > 17 ? 1: Convert.ToInt16 (matches[0].Value),
                                         SecondValue = 79
                                     };
                                     block.BlockItems.Add(blockItemValue);
